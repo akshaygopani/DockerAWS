@@ -4,7 +4,7 @@ pipeline{
           stage('Build') {
               
             steps {      
-                shell('sudo -S -i')
+                sh './run-container.sh'
             }
         }   
    }
