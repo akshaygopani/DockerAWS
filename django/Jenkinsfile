@@ -5,7 +5,7 @@ pipeline{
               
             steps {
       
-                sh "./cat docker-compose-aws.yml"
+                sh "cat ./docker-compose-aws.yml"
             }
         }   
    }
