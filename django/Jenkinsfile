@@ -6,7 +6,7 @@ pipeline{
             steps {      
                   sh '''
                      echo $PWD
-                     docker --contxt default container ls
+                     docker --context default container ls
                      '''
             }
         }   
