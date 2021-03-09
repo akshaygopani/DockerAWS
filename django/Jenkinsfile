@@ -6,7 +6,6 @@ pipeline{
             steps {      
                   sh '''
                      echo $PWD
-                     sudo su jenkins
                      ./django/run-container.sh
                      '''
             }
