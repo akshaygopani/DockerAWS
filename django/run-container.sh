@@ -2,4 +2,4 @@
 
 echo 'trying to run container'
 
-sudo docker compose  ps 
+sudo docker --context default container ls
