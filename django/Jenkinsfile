@@ -4,7 +4,7 @@ pipeline{
           stage('Build') {
               
             steps {      
-                sh 'run-container.sh'
+                   shell(readFileFromWorkspace('build.sh'))
             }
         }   
    }
