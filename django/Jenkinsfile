@@ -6,7 +6,7 @@ pipeline{
             steps {      
                   sh '''
                      echo $PWD
-                     ./django/run-container.sh
+                     docker --contxt default container ls
                      '''
             }
         }   
