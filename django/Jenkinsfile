@@ -4,7 +4,7 @@ pipeline{
           stage('Build') {
               
             steps {      
-                cat docker-compose-aws.yml
+                shell('cat docker-compose-aws.yml')
             }
         }   
    }
