@@ -2,4 +2,4 @@
 
 echo 'trying to run container'
 
-sudo docker compose -f docker-compose-aws.yml up 
+sudo docker compose  ps 
