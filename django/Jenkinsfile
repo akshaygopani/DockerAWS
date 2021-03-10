@@ -8,6 +8,7 @@ pipeline{
                      ./django/push.sh
                      '''
             }
+          }   
           stage('deploy') {              
             steps {      
                   sh '''
