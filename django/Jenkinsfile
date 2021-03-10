@@ -6,6 +6,7 @@ pipeline{
              steps{
 
                 sh '''
+                     docker context use default
                      echo '-----building docker image for nginx------------'
                      docker  build -t django_nginx:2.0  ./django/sampleApp/nginx
 
@@ -23,7 +24,9 @@ pipeline{
           stage('push') {
               
             steps {      
-                  sh '''            
+                  sh '''     
+                     docker context use default
+
                      echo '-----generatig authentication token-----'
                      aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
