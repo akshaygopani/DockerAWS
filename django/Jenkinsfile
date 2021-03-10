@@ -12,19 +12,19 @@ pipeline{
                      sudo docker --context default build  ./django/sampleApp/nginx
 
                      echo '-----adding tag to image------------'
-                     sudo docker tag django_nginx:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
+                     sudo docker --context default tag django_nginx:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
 
                      echo '-----pushing docker image to ecr------------'
-                     sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
+                     sudo docker --context default push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
 
                      echo '-----building docker image------------'
                      sudo docker --context default build ./django
 
                      echo '-----adding tag to image------------'
-                     sudo docker tag sampleapp:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0
+                     sudo docker --context default tag sampleapp:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0
 
                      echo '-----pushing docker image to ecr------------'
-                     sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0         
+                     sudo docker --context default push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0         
                      '''
             }
           }   
