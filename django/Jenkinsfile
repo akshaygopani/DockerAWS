@@ -9,7 +9,7 @@ pipeline{
                      aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
                      echo '-----building docker image------------'
-                     sudo docker --context default build  ./django/sampleApp/nginx
+                     sudo docker --context default build -t djang_nginx:2.0  ./django/sampleApp/nginx
 
                      echo '-----adding tag to image------------'
                      sudo docker --context default tag django_nginx:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
@@ -18,7 +18,7 @@ pipeline{
                      sudo docker --context default push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
 
                      echo '-----building docker image------------'
-                     sudo docker --context default build ./django
+                     sudo docker --context default build -t sampleapp:2.0 ./django
 
                      echo '-----adding tag to image------------'
                      sudo docker --context default tag sampleapp:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0
