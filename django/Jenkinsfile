@@ -44,7 +44,7 @@ pipeline{
                   sh '''
                      echo  '------creating a cloudformation stack for web app------'
                      docker context use remote-aws-docker
-                     echo 'no building only fun'
+                     docker compose -f /var/lib/jenkins/workspace/practise/django/docker-compose-aws.yml up
                      '''               
             }   
         }   
