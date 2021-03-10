@@ -1,14 +1,19 @@
 pipeline{
    agent any
    stages{
-          stage('Build') {
+          stage('push') {
               
             steps {      
                   sh '''
-                     echo $PWD
-                     docker --context default container ls
+                     ./django/push.sh
                      '''
             }
+          stage('deploy') {              
+            steps {      
+                  sh '''
+                     ./django/up.sh
+                     '''
+            }   
         }   
    }
 }
