@@ -1,30 +1,34 @@
 pipeline{
    agent any
    stages{
+          stage('build')
+          {
+               sh '''
+                     echo '-----building docker image------------'
+                     sudo docker  build -t django_nginx:2.0  ./django/sampleApp/nginx
+
+                     echo '-----adding tag to image------------'
+                     sudo docker tag django_nginx:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0  
+                     
+                     echo '-----building docker image------------'
+                     sudo docker build -t sampleapp:2.0 ./django
+
+                     echo '-----adding tag to image------------'
+                     sudo docker tag sampleapp:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0
+                 '''    
+          }
           stage('push') {
               
             steps {      
-                  sh '''
+                  sh '''            
                      echo '-----generatig authentication token-----'
                      aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
-                     echo '-----building docker image------------'
-                     sudo docker --context default build -t django_nginx:2.0  ./django/sampleApp/nginx
-
-                     echo '-----adding tag to image------------'
-                     sudo docker --context default tag django_nginx:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
+                     echo '-----pushing docker image to ecr------------'
+                     sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
 
                      echo '-----pushing docker image to ecr------------'
-                     sudo docker --context default push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0
-
-                     echo '-----building docker image------------'
-                     sudo docker --context default build -t sampleapp:2.0 ./django
-
-                     echo '-----adding tag to image------------'
-                     sudo docker --context default tag sampleapp:2.0 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0
-
-                     echo '-----pushing docker image to ecr------------'
-                     sudo docker --context default push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/django_nginx:2.0         
+                     sudo docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/sampleapp:2.0         
                      '''
             }
           }   
@@ -32,7 +36,7 @@ pipeline{
             steps {      
                   sh '''
                      echo  '------creating a cloudformation stack for our app------'
-                     sudo docker compose  -f docker-compose-aws.yml up
+                     sudo docker compose  -f ./django/docker-compose-aws.yml up
                      '''
             }   
         }   
