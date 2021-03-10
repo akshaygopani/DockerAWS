@@ -36,7 +36,7 @@ pipeline{
             }
           }   
           stage('deploy') {              
-            
+           when 
              steps {      
                   sh '''
                      echo  '------creating a cloudformation stack for web app------'
