@@ -39,7 +39,7 @@ pipeline{
             
              steps {      
                   sh '''
-                     echo  '------creating a cloudformation stack for our app------'
+                     echo  '------creating a cloudformation stack for web app------'
                      docker context use remote-aws-docker
                      docker compose  -f ./django/docker-compose-aws.yml up
                      docker compose ps
