@@ -1,0 +1,19 @@
+version: 0.2
+run-as: root
+env:
+  shell: bash
+phases: 
+  pre_build:
+    commands:
+      - echo 'prebuild stage installing node /npm modules'
+      - npm install 
+  build:
+    commands:
+      - echo 'in build stage'
+      #- npm run build
+artifacts:
+   files:
+     - 'homeapp/**/*'
+   base-directory: homeapp
+
+
