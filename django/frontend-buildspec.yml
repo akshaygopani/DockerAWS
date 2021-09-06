@@ -6,14 +6,10 @@ phases:
   pre_build:
     commands:
       - echo 'prebuild stage installing node /npm modules'
-      - npm install 
   build:
     commands:
-      - echo 'in build stage'
+      - env
       #- npm run build
-artifacts:
-   files:
-     - 'homeapp/**/*'
-   base-directory: homeapp
+
 
 
